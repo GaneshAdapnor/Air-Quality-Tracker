@@ -633,11 +633,13 @@ def render_sidebar():
     countries = sorted(WORLD_CITIES.keys())
     sel_country = st.sidebar.selectbox("Country", countries,
                                        label_visibility="visible", key="dd_country")
-    if st.session_state.get("_last_country") != sel_country:
-        st.session_state["_last_country"] = sel_country
-        st.session_state.pop("dd_city", None)
 
     cities = sorted(c for c,_,_,_,_ in WORLD_CITIES[sel_country])
+
+    if st.session_state.get("_last_country") != sel_country:
+        st.session_state["_last_country"] = sel_country
+        st.session_state["dd_city"] = cities[0]
+
     sel_city = st.sidebar.selectbox("City", cities,
                                     label_visibility="visible", key="dd_city")
 
