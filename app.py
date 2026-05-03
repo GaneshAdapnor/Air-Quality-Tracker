@@ -16,6 +16,8 @@ st.set_page_config(
 
 # ─── Theme palettes ───────────────────────────────────────────────────────────
 
+OWM_API_KEY = "9b5affb0c6fe52f6cde983871f144b5e"
+
 LIGHT = dict(
     bg="#F0F4F8", card="#FFFFFF", card2="#F8FAFC",
     border="#E2E8F0", border2="#CBD5E1",
@@ -642,17 +644,6 @@ def render_sidebar():
     st.sidebar.markdown("""
     <div style='padding:16px 20px 8px; border-top:1px solid #1E2D45; margin-top:8px;'>
         <div style='font-size:0.62rem;font-weight:700;text-transform:uppercase;
-             letter-spacing:0.12em;color:#475569;margin-bottom:10px;'>🌐 API Key</div>
-    </div>
-    """, unsafe_allow_html=True)
-    api_key = st.sidebar.text_input(
-        "OpenWeatherMap", value="9b5affb0c6fe52f6cde983871f144b5e",
-        type="password", label_visibility="visible", key="owm_key",
-    )
-
-    st.sidebar.markdown("""
-    <div style='padding:16px 20px 8px; border-top:1px solid #1E2D45; margin-top:8px;'>
-        <div style='font-size:0.62rem;font-weight:700;text-transform:uppercase;
              letter-spacing:0.12em;color:#475569;margin-bottom:10px;'>🔀 Compare Cities</div>
     </div>
     """, unsafe_allow_html=True)
@@ -670,7 +661,7 @@ def render_sidebar():
     </div>
     """, unsafe_allow_html=True)
 
-    return sel_city, sel_country, api_key.strip(), compare_cities
+    return sel_city, sel_country, compare_cities
 
 
 # ─── UI helpers ───────────────────────────────────────────────────────────────
@@ -726,7 +717,8 @@ def main():
     T = DARK if is_dark else LIGHT
     inject_css(T)
 
-    sel_city, sel_country, api_key, compare_cities = render_sidebar()
+    sel_city, sel_country, compare_cities = render_sidebar()
+    api_key = OWM_API_KEY
 
     # ── Theme toggle + header ─────────────────────────────────────────────
     hdr_left, hdr_right = st.columns([0.80, 0.20])
