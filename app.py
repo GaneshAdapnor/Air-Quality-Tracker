@@ -16,7 +16,7 @@ st.set_page_config(
 
 # ─── Theme palettes ───────────────────────────────────────────────────────────
 
-OWM_API_KEY = "9b5affb0c6fe52f6cde983871f144b5e"
+OWM_API_KEY = "ff3c03700a099b92b733a230928c4636"
 
 LIGHT = dict(
     bg="#F0F4F8", card="#FFFFFF", card2="#F8FAFC",
@@ -700,8 +700,8 @@ def show_no_data(sel_city, T):
         <div style='font-size:1.3rem;font-weight:700;color:{T["text1"]};margin-bottom:8px;'>
             Could not fetch live data for {sel_city}</div>
         <div style='font-size:0.88rem;color:{T["text2"]};max-width:420px;margin:0 auto;'>
-            Check your OpenWeatherMap API key in the sidebar, or try again in a moment.
-            The API key must be active — new keys can take up to 2 hours to activate.
+            Could not reach the OpenWeatherMap API. The service may be temporarily unavailable —
+            please try again in a moment.
         </div>
     </div>
     """, unsafe_allow_html=True)
