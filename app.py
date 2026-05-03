@@ -492,87 +492,114 @@ def inject_css(T):
 
 # ─── Constants ────────────────────────────────────────────────────────────────
 
+# Tuple format: (city, pollution_factor, hemisphere, latitude, longitude)
 WORLD_CITIES = {
-    "India":          [("Delhi",1.65,"N"),("Mumbai",1.25,"N"),("Kolkata",1.40,"N"),("Chennai",0.88,"N"),
-                       ("Bangalore",0.75,"N"),("Hyderabad",1.02,"N"),("Pune",0.90,"N"),("Ahmedabad",1.18,"N"),
-                       ("Jaipur",1.22,"N"),("Lucknow",1.35,"N"),("Patna",1.45,"N"),("Bhopal",1.10,"N")],
-    "Bangladesh":     [("Dhaka",1.72,"N"),("Chittagong",1.40,"N")],
-    "Pakistan":       [("Karachi",1.55,"N"),("Lahore",1.68,"N"),("Islamabad",1.20,"N")],
-    "Nepal":          [("Kathmandu",1.30,"N")],
-    "Sri Lanka":      [("Colombo",0.85,"N")],
-    "China":          [("Beijing",1.70,"N"),("Shanghai",1.45,"N"),("Guangzhou",1.35,"N"),
-                       ("Shenzhen",1.25,"N"),("Chengdu",1.40,"N"),("Wuhan",1.38,"N"),
-                       ("Xian",1.50,"N"),("Chongqing",1.42,"N"),("Tianjin",1.55,"N")],
-    "Japan":          [("Tokyo",0.65,"N"),("Osaka",0.68,"N"),("Kyoto",0.60,"N"),("Nagoya",0.67,"N")],
-    "South Korea":    [("Seoul",0.85,"N"),("Busan",0.80,"N"),("Incheon",0.82,"N")],
-    "Taiwan":         [("Taipei",0.75,"N"),("Kaohsiung",0.80,"N")],
-    "Indonesia":      [("Jakarta",1.30,"S"),("Surabaya",1.15,"S"),("Bandung",1.10,"S")],
-    "Philippines":    [("Manila",1.25,"N"),("Cebu",1.10,"N")],
-    "Vietnam":        [("Hanoi",1.20,"N"),("Ho Chi Minh City",1.15,"N")],
-    "Thailand":       [("Bangkok",1.15,"N"),("Chiang Mai",0.90,"N")],
-    "Malaysia":       [("Kuala Lumpur",0.95,"N"),("Penang",0.85,"N")],
-    "Singapore":      [("Singapore",0.70,"N")],
-    "Myanmar":        [("Yangon",1.20,"N")],
-    "Cambodia":       [("Phnom Penh",1.10,"N")],
-    "Saudi Arabia":   [("Riyadh",1.10,"N"),("Jeddah",1.05,"N"),("Mecca",1.08,"N")],
-    "UAE":            [("Dubai",0.95,"N"),("Abu Dhabi",0.90,"N")],
-    "Iran":           [("Tehran",1.30,"N"),("Isfahan",1.10,"N")],
-    "Iraq":           [("Baghdad",1.25,"N"),("Basra",1.15,"N")],
-    "Turkey":         [("Istanbul",0.90,"N"),("Ankara",0.85,"N"),("Izmir",0.78,"N")],
-    "Israel":         [("Tel Aviv",0.75,"N"),("Jerusalem",0.70,"N")],
-    "Kazakhstan":     [("Almaty",1.10,"N"),("Astana",1.05,"N")],
-    "Uzbekistan":     [("Tashkent",1.15,"N")],
-    "United Kingdom": [("London",0.65,"N"),("Birmingham",0.70,"N"),("Manchester",0.68,"N"),("Glasgow",0.60,"N")],
-    "France":         [("Paris",0.70,"N"),("Lyon",0.62,"N"),("Marseille",0.65,"N")],
-    "Germany":        [("Berlin",0.60,"N"),("Munich",0.55,"N"),("Hamburg",0.58,"N"),("Frankfurt",0.62,"N")],
-    "Italy":          [("Rome",0.72,"N"),("Milan",0.78,"N"),("Naples",0.75,"N")],
-    "Spain":          [("Madrid",0.68,"N"),("Barcelona",0.70,"N"),("Valencia",0.65,"N")],
-    "Netherlands":    [("Amsterdam",0.58,"N"),("Rotterdam",0.60,"N")],
-    "Belgium":        [("Brussels",0.65,"N")],
-    "Switzerland":    [("Zurich",0.45,"N"),("Geneva",0.42,"N")],
-    "Sweden":         [("Stockholm",0.42,"N"),("Gothenburg",0.44,"N")],
-    "Norway":         [("Oslo",0.40,"N")],
-    "Denmark":        [("Copenhagen",0.43,"N")],
-    "Finland":        [("Helsinki",0.38,"N")],
-    "Poland":         [("Warsaw",0.75,"N"),("Krakow",0.80,"N")],
-    "Czech Republic": [("Prague",0.68,"N")],
-    "Austria":        [("Vienna",0.55,"N")],
-    "Portugal":       [("Lisbon",0.62,"N"),("Porto",0.58,"N")],
-    "Greece":         [("Athens",0.72,"N")],
-    "Hungary":        [("Budapest",0.70,"N")],
-    "Romania":        [("Bucharest",0.82,"N")],
-    "Ukraine":        [("Kyiv",0.80,"N"),("Kharkiv",0.82,"N")],
-    "Russia":         [("Moscow",0.85,"N"),("Saint Petersburg",0.78,"N"),("Novosibirsk",0.88,"N")],
-    "United States":  [("New York",0.72,"N"),("Los Angeles",0.82,"N"),("Chicago",0.75,"N"),
-                       ("Houston",0.80,"N"),("Phoenix",0.78,"N"),("Dallas",0.76,"N"),
-                       ("Seattle",0.55,"N"),("Miami",0.65,"N"),("Denver",0.60,"N"),
-                       ("Boston",0.65,"N"),("Atlanta",0.72,"N"),("San Francisco",0.58,"N")],
-    "Canada":         [("Toronto",0.60,"N"),("Vancouver",0.48,"N"),("Montreal",0.58,"N"),("Calgary",0.52,"N")],
-    "Mexico":         [("Mexico City",1.15,"N"),("Guadalajara",0.95,"N"),("Monterrey",1.00,"N")],
-    "Brazil":         [("Sao Paulo",0.95,"S"),("Rio de Janeiro",0.88,"S"),("Brasilia",0.72,"S"),("Belo Horizonte",0.85,"S")],
-    "Argentina":      [("Buenos Aires",0.82,"S"),("Cordoba",0.75,"S")],
-    "Colombia":       [("Bogota",0.90,"N"),("Medellin",0.85,"N")],
-    "Chile":          [("Santiago",0.88,"S")],
-    "Peru":           [("Lima",0.92,"S")],
-    "Venezuela":      [("Caracas",0.95,"N")],
-    "Ecuador":        [("Quito",0.70,"S")],
-    "Egypt":          [("Cairo",1.25,"N"),("Alexandria",1.10,"N")],
-    "Nigeria":        [("Lagos",1.30,"N"),("Abuja",1.00,"N"),("Kano",1.20,"N")],
-    "South Africa":   [("Johannesburg",0.92,"S"),("Cape Town",0.72,"S"),("Durban",0.85,"S")],
-    "Kenya":          [("Nairobi",0.88,"S")],
-    "Ethiopia":       [("Addis Ababa",0.95,"N")],
-    "Ghana":          [("Accra",0.92,"N")],
-    "Morocco":        [("Casablanca",0.90,"N"),("Rabat",0.82,"N")],
-    "Tanzania":       [("Dar es Salaam",0.88,"S")],
-    "Algeria":        [("Algiers",0.95,"N")],
-    "Australia":      [("Sydney",0.48,"S"),("Melbourne",0.45,"S"),("Brisbane",0.50,"S"),
-                       ("Perth",0.42,"S"),("Adelaide",0.44,"S")],
-    "New Zealand":    [("Auckland",0.38,"S"),("Wellington",0.35,"S")],
+    "India":          [("Delhi",1.65,"N",28.6139,77.2090),("Mumbai",1.25,"N",19.0760,72.8777),
+                       ("Kolkata",1.40,"N",22.5726,88.3639),("Chennai",0.88,"N",13.0827,80.2707),
+                       ("Bangalore",0.75,"N",12.9716,77.5946),("Hyderabad",1.02,"N",17.3850,78.4867),
+                       ("Pune",0.90,"N",18.5204,73.8567),("Ahmedabad",1.18,"N",23.0225,72.5714),
+                       ("Jaipur",1.22,"N",26.9124,75.7873),("Lucknow",1.35,"N",26.8467,80.9462),
+                       ("Patna",1.45,"N",25.5941,85.1376),("Bhopal",1.10,"N",23.2599,77.4126)],
+    "Bangladesh":     [("Dhaka",1.72,"N",23.8103,90.4125),("Chittagong",1.40,"N",22.3569,91.7832)],
+    "Pakistan":       [("Karachi",1.55,"N",24.8607,67.0011),("Lahore",1.68,"N",31.5204,74.3587),
+                       ("Islamabad",1.20,"N",33.6844,73.0479)],
+    "Nepal":          [("Kathmandu",1.30,"N",27.7172,85.3240)],
+    "Sri Lanka":      [("Colombo",0.85,"N",6.9271,79.8612)],
+    "China":          [("Beijing",1.70,"N",39.9042,116.4074),("Shanghai",1.45,"N",31.2304,121.4737),
+                       ("Guangzhou",1.35,"N",23.1291,113.2644),("Shenzhen",1.25,"N",22.5431,114.0579),
+                       ("Chengdu",1.40,"N",30.5728,104.0668),("Wuhan",1.38,"N",30.5928,114.3055),
+                       ("Xian",1.50,"N",34.3416,108.9398),("Chongqing",1.42,"N",29.4316,106.9123),
+                       ("Tianjin",1.55,"N",39.3434,117.3616)],
+    "Japan":          [("Tokyo",0.65,"N",35.6762,139.6503),("Osaka",0.68,"N",34.6937,135.5023),
+                       ("Kyoto",0.60,"N",35.0116,135.7681),("Nagoya",0.67,"N",35.1815,136.9066)],
+    "South Korea":    [("Seoul",0.85,"N",37.5665,126.9780),("Busan",0.80,"N",35.1796,129.0756),
+                       ("Incheon",0.82,"N",37.4563,126.7052)],
+    "Taiwan":         [("Taipei",0.75,"N",25.0330,121.5654),("Kaohsiung",0.80,"N",22.6273,120.3014)],
+    "Indonesia":      [("Jakarta",1.30,"S",-6.2088,106.8456),("Surabaya",1.15,"S",-7.2575,112.7521),
+                       ("Bandung",1.10,"S",-6.9175,107.6191)],
+    "Philippines":    [("Manila",1.25,"N",14.5995,120.9842),("Cebu",1.10,"N",10.3157,123.8854)],
+    "Vietnam":        [("Hanoi",1.20,"N",21.0285,105.8542),("Ho Chi Minh City",1.15,"N",10.8231,106.6297)],
+    "Thailand":       [("Bangkok",1.15,"N",13.7563,100.5018),("Chiang Mai",0.90,"N",18.7883,98.9853)],
+    "Malaysia":       [("Kuala Lumpur",0.95,"N",3.1390,101.6869),("Penang",0.85,"N",5.4141,100.3288)],
+    "Singapore":      [("Singapore",0.70,"N",1.3521,103.8198)],
+    "Myanmar":        [("Yangon",1.20,"N",16.8661,96.1951)],
+    "Cambodia":       [("Phnom Penh",1.10,"N",11.5564,104.9282)],
+    "Saudi Arabia":   [("Riyadh",1.10,"N",24.7136,46.6753),("Jeddah",1.05,"N",21.4858,39.1925),
+                       ("Mecca",1.08,"N",21.3891,39.8579)],
+    "UAE":            [("Dubai",0.95,"N",25.2048,55.2708),("Abu Dhabi",0.90,"N",24.4539,54.3773)],
+    "Iran":           [("Tehran",1.30,"N",35.6892,51.3890),("Isfahan",1.10,"N",32.6546,51.6680)],
+    "Iraq":           [("Baghdad",1.25,"N",33.3152,44.3661),("Basra",1.15,"N",30.5085,47.7804)],
+    "Turkey":         [("Istanbul",0.90,"N",41.0082,28.9784),("Ankara",0.85,"N",39.9334,32.8597),
+                       ("Izmir",0.78,"N",38.4192,27.1287)],
+    "Israel":         [("Tel Aviv",0.75,"N",32.0853,34.7818),("Jerusalem",0.70,"N",31.7683,35.2137)],
+    "Kazakhstan":     [("Almaty",1.10,"N",43.2220,76.8512),("Astana",1.05,"N",51.1801,71.4460)],
+    "Uzbekistan":     [("Tashkent",1.15,"N",41.2995,69.2401)],
+    "United Kingdom": [("London",0.65,"N",51.5074,-0.1278),("Birmingham",0.70,"N",52.4862,-1.8904),
+                       ("Manchester",0.68,"N",53.4808,-2.2426),("Glasgow",0.60,"N",55.8642,-4.2518)],
+    "France":         [("Paris",0.70,"N",48.8566,2.3522),("Lyon",0.62,"N",45.7640,4.8357),
+                       ("Marseille",0.65,"N",43.2965,5.3698)],
+    "Germany":        [("Berlin",0.60,"N",52.5200,13.4050),("Munich",0.55,"N",48.1351,11.5820),
+                       ("Hamburg",0.58,"N",53.5511,9.9937),("Frankfurt",0.62,"N",50.1109,8.6821)],
+    "Italy":          [("Rome",0.72,"N",41.9028,12.4964),("Milan",0.78,"N",45.4654,9.1859),
+                       ("Naples",0.75,"N",40.8518,14.2681)],
+    "Spain":          [("Madrid",0.68,"N",40.4168,-3.7038),("Barcelona",0.70,"N",41.3851,2.1734),
+                       ("Valencia",0.65,"N",39.4699,-0.3763)],
+    "Netherlands":    [("Amsterdam",0.58,"N",52.3676,4.9041),("Rotterdam",0.60,"N",51.9244,4.4777)],
+    "Belgium":        [("Brussels",0.65,"N",50.8503,4.3517)],
+    "Switzerland":    [("Zurich",0.45,"N",47.3769,8.5417),("Geneva",0.42,"N",46.2044,6.1432)],
+    "Sweden":         [("Stockholm",0.42,"N",59.3293,18.0686),("Gothenburg",0.44,"N",57.7089,11.9746)],
+    "Norway":         [("Oslo",0.40,"N",59.9139,10.7522)],
+    "Denmark":        [("Copenhagen",0.43,"N",55.6761,12.5683)],
+    "Finland":        [("Helsinki",0.38,"N",60.1699,24.9384)],
+    "Poland":         [("Warsaw",0.75,"N",52.2297,21.0122),("Krakow",0.80,"N",50.0647,19.9450)],
+    "Czech Republic": [("Prague",0.68,"N",50.0755,14.4378)],
+    "Austria":        [("Vienna",0.55,"N",48.2082,16.3738)],
+    "Portugal":       [("Lisbon",0.62,"N",38.7223,-9.1393),("Porto",0.58,"N",41.1579,-8.6291)],
+    "Greece":         [("Athens",0.72,"N",37.9838,23.7275)],
+    "Hungary":        [("Budapest",0.70,"N",47.4979,19.0402)],
+    "Romania":        [("Bucharest",0.82,"N",44.4268,26.1025)],
+    "Ukraine":        [("Kyiv",0.80,"N",50.4501,30.5234),("Kharkiv",0.82,"N",49.9935,36.2304)],
+    "Russia":         [("Moscow",0.85,"N",55.7558,37.6173),("Saint Petersburg",0.78,"N",59.9311,30.3609),
+                       ("Novosibirsk",0.88,"N",54.9884,82.9357)],
+    "United States":  [("New York",0.72,"N",40.7128,-74.0060),("Los Angeles",0.82,"N",34.0522,-118.2437),
+                       ("Chicago",0.75,"N",41.8781,-87.6298),("Houston",0.80,"N",29.7604,-95.3698),
+                       ("Phoenix",0.78,"N",33.4484,-112.0740),("Dallas",0.76,"N",32.7767,-96.7970),
+                       ("Seattle",0.55,"N",47.6062,-122.3321),("Miami",0.65,"N",25.7617,-80.1918),
+                       ("Denver",0.60,"N",39.7392,-104.9903),("Boston",0.65,"N",42.3601,-71.0589),
+                       ("Atlanta",0.72,"N",33.7490,-84.3880),("San Francisco",0.58,"N",37.7749,-122.4194)],
+    "Canada":         [("Toronto",0.60,"N",43.6532,-79.3832),("Vancouver",0.48,"N",49.2827,-123.1207),
+                       ("Montreal",0.58,"N",45.5017,-73.5673),("Calgary",0.52,"N",51.0447,-114.0719)],
+    "Mexico":         [("Mexico City",1.15,"N",19.4326,-99.1332),("Guadalajara",0.95,"N",20.6597,-103.3496),
+                       ("Monterrey",1.00,"N",25.6866,-100.3161)],
+    "Brazil":         [("Sao Paulo",0.95,"S",-23.5505,-46.6333),("Rio de Janeiro",0.88,"S",-22.9068,-43.1729),
+                       ("Brasilia",0.72,"S",-15.7942,-47.8825),("Belo Horizonte",0.85,"S",-19.9191,-43.9386)],
+    "Argentina":      [("Buenos Aires",0.82,"S",-34.6037,-58.3816),("Cordoba",0.75,"S",-31.4201,-64.1888)],
+    "Colombia":       [("Bogota",0.90,"N",4.7110,-74.0721),("Medellin",0.85,"N",6.2442,-75.5812)],
+    "Chile":          [("Santiago",0.88,"S",-33.4489,-70.6693)],
+    "Peru":           [("Lima",0.92,"S",-12.0464,-77.0428)],
+    "Venezuela":      [("Caracas",0.95,"N",10.4806,-66.9036)],
+    "Ecuador":        [("Quito",0.70,"S",-0.1807,-78.4678)],
+    "Egypt":          [("Cairo",1.25,"N",30.0444,31.2357),("Alexandria",1.10,"N",31.2001,29.9187)],
+    "Nigeria":        [("Lagos",1.30,"N",6.5244,3.3792),("Abuja",1.00,"N",9.0765,7.3986),
+                       ("Kano",1.20,"N",12.0022,8.5920)],
+    "South Africa":   [("Johannesburg",0.92,"S",-26.2041,28.0473),("Cape Town",0.72,"S",-33.9249,18.4241),
+                       ("Durban",0.85,"S",-29.8587,31.0218)],
+    "Kenya":          [("Nairobi",0.88,"S",-1.2921,36.8219)],
+    "Ethiopia":       [("Addis Ababa",0.95,"N",8.9806,38.7578)],
+    "Ghana":          [("Accra",0.92,"N",5.6037,-0.1870)],
+    "Morocco":        [("Casablanca",0.90,"N",33.5731,-7.5898),("Rabat",0.82,"N",34.0209,-6.8416)],
+    "Tanzania":       [("Dar es Salaam",0.88,"S",-6.7924,39.2083)],
+    "Algeria":        [("Algiers",0.95,"N",36.7372,3.0865)],
+    "Australia":      [("Sydney",0.48,"S",-33.8688,151.2093),("Melbourne",0.45,"S",-37.8136,144.9631),
+                       ("Brisbane",0.50,"S",-27.4698,153.0251),("Perth",0.42,"S",-31.9505,115.8605),
+                       ("Adelaide",0.44,"S",-34.9285,138.6007)],
+    "New Zealand":    [("Auckland",0.38,"S",-36.8485,174.7633),("Wellington",0.35,"S",-41.2866,174.7756)],
 }
 
-CITIES_COUNTRIES = {city: country for country, cities in WORLD_CITIES.items() for city,_,_ in cities}
-CITY_FACTOR      = {city: factor  for cities in WORLD_CITIES.values() for city, factor, _ in cities}
-CITY_HEMI        = {city: hemi    for cities in WORLD_CITIES.values() for city, _, hemi in cities}
+CITIES_COUNTRIES = {city: country for country, cities in WORLD_CITIES.items() for city,_,_,_,_ in cities}
+CITY_FACTOR      = {city: factor  for cities in WORLD_CITIES.values() for city, factor, _, _, _ in cities}
+CITY_HEMI        = {city: hemi    for cities in WORLD_CITIES.values() for city, _, hemi, _, _ in cities}
+CITY_COORDS      = {city: (lat, lon) for cities in WORLD_CITIES.values() for city, _, _, lat, lon in cities}
 FEATURES = ["pm25","pm10","co","no2","o3","so2","temperature","humidity",
             "wind_speed","month","day_of_year","city_enc"]
 TARGETS  = ["outdoor_aqi","indoor_aqi","outdoor_purified","indoor_purified"]
@@ -616,6 +643,43 @@ def aqi_meta(aqi):
     if aqi <= 200: return "Unhealthy",             "#EF4444", "unhealthy"
     if aqi <= 300: return "Very Unhealthy",        "#8B5CF6", "very"
     return               "Hazardous",              "#64748B", "hazardous"
+
+
+# ─── Live data fetch (OpenWeatherMap) ────────────────────────────────────────
+
+@st.cache_data(ttl=1800, show_spinner=False)
+def fetch_live_data(lat, lon, api_key):
+    import requests
+    try:
+        ap = requests.get(
+            "https://api.openweathermap.org/data/2.5/air_pollution",
+            params={"lat": lat, "lon": lon, "appid": api_key},
+            timeout=8,
+        )
+        ap.raise_for_status()
+        comp = ap.json()["list"][0]["components"]
+
+        wx = requests.get(
+            "https://api.openweathermap.org/data/2.5/weather",
+            params={"lat": lat, "lon": lon, "appid": api_key, "units": "metric"},
+            timeout=8,
+        )
+        wx.raise_for_status()
+        w = wx.json()
+
+        return {
+            "pm25":        float(comp.get("pm2_5", 0)),
+            "pm10":        float(comp.get("pm10",  0)),
+            "co":          float(comp.get("co",    0)) / 1145.0,  # μg/m³ → ppm
+            "no2":         float(comp.get("no2",   0)),
+            "o3":          float(comp.get("o3",    0)),
+            "so2":         float(comp.get("so2",   0)),
+            "temperature": float(w["main"]["temp"]),
+            "humidity":    float(w["main"]["humidity"]),
+            "wind_speed":  float(w["wind"]["speed"]) * 3.6,  # m/s → km/h
+        }
+    except Exception:
+        return None
 
 
 # ─── Data ─────────────────────────────────────────────────────────────────────
@@ -927,6 +991,20 @@ def render_sidebar(df, metrics):
         unsafe_allow_html=True,
     )
 
+    # Live data API key
+    st.sidebar.markdown("""
+    <div style='padding:16px 20px 8px; border-top:1px solid #1E2D45; margin-top:8px;'>
+        <div style='font-size:0.62rem;font-weight:700;text-transform:uppercase;
+             letter-spacing:0.12em;color:#475569;margin-bottom:10px;'>
+             🌐 Live Data (OpenWeatherMap)</div>
+    </div>
+    """, unsafe_allow_html=True)
+    api_key = st.sidebar.text_input(
+        "API Key", value="9b5affb0c6fe52f6cde983871f144b5e",
+        type="password", placeholder="Paste your API key",
+        label_visibility="visible", key="owm_api_key",
+    )
+
     # Model accuracy
     st.sidebar.markdown("""
     <div style='padding:16px 20px 8px; border-top:1px solid #1E2D45; margin-top:12px;'>
@@ -946,12 +1024,12 @@ def render_sidebar(df, metrics):
     <div style='position:absolute;bottom:0;left:0;right:0;padding:14px 20px;
          border-top:1px solid #1E2D45;'>
         <div style='font-size:0.65rem;color:#334155;text-align:center;font-weight:500;'>
-            Powered by XGBoost · 120+ Cities
+            Powered by XGBoost · OpenWeatherMap · 120+ Cities
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    return sel_city, sel_country, from_date, to_date
+    return sel_city, sel_country, from_date, to_date, api_key
 
 
 # ─── KPI card helper ──────────────────────────────────────────────────────────
@@ -1000,7 +1078,7 @@ def main():
     T = DARK if is_dark else LIGHT
     inject_css(T)
 
-    sel_city, sel_country, from_date, to_date = render_sidebar(df, metrics)
+    sel_city, sel_country, from_date, to_date, api_key = render_sidebar(df, metrics)
 
     cell_styles = DARK_CELLS if is_dark else LIGHT_CELLS
     cat_styles  = DARK_CAT   if is_dark else LIGHT_CAT
@@ -1020,8 +1098,31 @@ def main():
     if filtered_df.empty:
         filtered_df = city_df
 
-    cur  = filtered_df.iloc[-1]
     prev = filtered_df.iloc[0]
+
+    # ── Attempt live data fetch ───────────────────────────────────────────
+    import datetime as _dt
+    is_live = False
+    live_data = None
+    if api_key.strip():
+        lat, lon = CITY_COORDS[sel_city]
+        with st.spinner(f"Fetching live data for {sel_city}…"):
+            live_data = fetch_live_data(lat, lon, api_key.strip())
+
+    if live_data:
+        is_live = True
+        today = _dt.date.today()
+        live_row = {**live_data,
+                    "month": today.month,
+                    "day_of_year": today.timetuple().tm_yday,
+                    "city_enc": int(le.transform([sel_city])[0])}
+        live_X = pd.DataFrame([live_row])[FEATURES]
+        for t in TARGETS:
+            live_row[f"pred_{t}"] = float(models[t].predict(live_X)[0])
+        live_row["date"] = pd.Timestamp(today)
+        cur = pd.Series(live_row)
+    else:
+        cur = filtered_df.iloc[-1]
 
     lbl_cur, color_cur, _ = aqi_meta(cur["pred_outdoor_aqi"])
 
@@ -1037,6 +1138,12 @@ def main():
             f"📍 {sel_city}, {sel_country}</div>"
             f"<div style='background:{color_cur};border-radius:20px;padding:4px 12px;"
             f"font-size:0.72rem;font-weight:700;color:white;'>{lbl_cur}</div>"
+            + (f"<div style='background:#ECFDF5;border:1px solid #6EE7B7;border-radius:20px;"
+               f"padding:4px 12px;font-size:0.72rem;font-weight:700;color:#065F46;'>"
+               f"🟢 LIVE</div>" if is_live else
+               f"<div style='background:#F8FAFC;border:1px solid #CBD5E1;border-radius:20px;"
+               f"padding:4px 12px;font-size:0.72rem;font-weight:600;color:#64748B;'>"
+               f"Simulated</div>") +
             f"</div>",
             unsafe_allow_html=True,
         )
